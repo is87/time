@@ -136,7 +136,27 @@ function hideSettings(){
       pressedDiv = evt.target;
     }
     thisDay = pressedDiv.myParam;
-    loadDay(thisYear, thisMonth, thisDay);
+    //loadDay(thisYear, thisMonth, thisDay);
+    showDay(thisYear, thisMonth, thisDay);
+  }
+
+  function showDay(year, month, day){
+    var d = new Date(year, month, day);
+    wday = weekdays[d.getDay()];
+    document.getElementById("actionBox").innerHTML = wday + ", " + months[month] + " " + day;
+    dateString = year+"-"+addZero(month+1)+"-"+addZero(day);
+    ds = db.dates;
+    hit = false;
+    for(i=0;i<ds.length;i++){
+      if(dateString==ds[i].date){
+        hit = true;
+        document.getElementById("actionBox").innerHTML += "<br>Hours: "+toHours(ds[i]["hours"]);
+        document.getElementById("actionBox").innerHTML += "<br>Publications: "+ds[i]["publications"];
+      }
+    }
+    if(!hit)document.getElementById("actionBox").innerHTML += "<br>This day is empty";
+    document.getElementById("actionBox").innerHTML += "<br><button onclick='loadDay("+year+","+month+","+day+");'>Edit</button>";
+        
   }
 
   function loadDay(year, month, day){
@@ -158,8 +178,8 @@ function hideSettings(){
     for(i=0;i<ds.length;i++){
       if(dateString==ds[i].date){
         hit = true;
-        document.getElementById("stat1").value = ds[i]["hours"];
-        document.getElementById("stat2").value = ds[i]["ldcHours"];
+        document.getElementById("stat1").value = toHours(ds[i]["hours"]);
+        document.getElementById("stat2").value = toHours(ds[i]["ldcHours"]);
         document.getElementById("stat3").value = ds[i]["publications"];
         document.getElementById("stat4").value = ds[i]["movies"];
         document.getElementById("stat5").value = ds[i]["returnVisits"];
@@ -186,28 +206,6 @@ function hideSettings(){
     if(number%10==3 && (number < 10 || number > 20) )return number + "rd";
     return number + "th";
   }
-
-  function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + "; " + expires;
-}
-
-  function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0)==' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length,c.length);
-        }
-    }
-    return "";
-}
 
 
 

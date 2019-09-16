@@ -32,10 +32,11 @@ input {
 </head>
 <body style="background-color: #ECEAE7; background-color: #FFFFFF; font-family: 'Quicksand', sans-serif; padding:0; margin:0; color:#333;">
   <div id="navBox" style="background-color:#328b8c; color:#fff; height: 40px; text-align:center; line-height:40px; box-shadow: 0px 2px 1px #999;"></div>
-  <div id="monthBox" style="font-size: 12px; width: 100%; overflow:auto; position: absolute; left:0px; top: 40px; bottom: 40px;">
+  <div id="monthBox" style="font-size: 12px; width: 100%; overflow:auto; position: absolute; left:0px; top: 40px; bottom: 140px;">
     <!--<div style="position: absolute; bottom: 0px; left: 0px; width: 100%; height: 100px; background-color: #555;"></div>-->
   </div>
-  <div id="overviewBox" style="font-size: 12px; width: 100%; overflow:auto; position: absolute; left:0px; top: 40px; bottom: 40px; display: none;"></div>
+  <div id="overviewBox" style="font-size: 12px; width: 100%; overflow:auto; position: absolute; left:0px; top: 40px; bottom: 140px; display: none;"></div>
+  <div id="actionBox" style="font-size: 12px; width: 100%; overflow:auto; position: fixed; left:0px; height: 100px; bottom: 40px; background-color: #555; color:#FFF; text-align:center;">Some different actions</div>
   <div id="bottomBox" style="width: 100%; height: 40px; font-size: 12px; position: fixed; left: 0px; bottom: 0px; background-color: #328b8c; color:#fff;  text-align:center; line-height:40px;"><span onClick="seeToday();">START</span> - <span onClick="seeThisMonth();">ADD REPORT</span> - <span onClick="loadThisOverview();">OVERVIEW</span> - <span onClick="showSettings();">SETTINGS<span></div>
   <div id="modal" style="display:none; position:fixed; left:0; top:0; width:100%; height:100%; z-index:1; overflow:auto; background-color:rgba(0,0,0,0.4);">
     <div style='background-color: #fefefe; margin: 10% auto; width: 80%; box-shadow: 2px 2px 5px #666;'>
