@@ -67,6 +67,7 @@ function save(){
   localStorage.setItem("data", JSON.stringify(db));
   console.log(localStorage.getItem("data"));
   document.getElementById("modal").style.display = "none";
+  backToMonth();
 }
 
 
@@ -152,6 +153,8 @@ function hideSettings(){
         hit = true;
         document.getElementById("actionBox").innerHTML += "<br>Hours: "+toHours(ds[i]["hours"]);
         document.getElementById("actionBox").innerHTML += "<br>Publications: "+ds[i]["publications"];
+        document.getElementById("actionBox").innerHTML += "<br>Movies: "+ds[i]["movies"];
+        document.getElementById("actionBox").innerHTML += "<br>Return visits: "+ds[i]["returnVisits"];
       }
     }
     if(!hit)document.getElementById("actionBox").innerHTML += "<br>This day is empty";
@@ -229,6 +232,7 @@ function hideSettings(){
     navBox = document.getElementById("navBox");
     monthBox = document.getElementById("monthBox");
     overviewBox = document.getElementById("overviewBox");
+    actionBox = document.getElementById("actionBox");
 
 var mc = new Hammer(monthBox);
 var mc2 = new Hammer(overviewBox);
@@ -258,6 +262,7 @@ mc2.on("swiperight", function(ev) {
   }
 
 function loadOverview(year, month, day){
+  actionBox.innerHTML = "";
   w = window.innerWidth;
     h = window.innerHeight;
     if(h<w)w=h;
@@ -305,6 +310,10 @@ function loadOverview(year, month, day){
         if(ds[i].studies!="")studies += parseInt(ds[i].studies);
       }
     }
+    reportText = "Field ministry for the month of "+months[d.getMonth()]+": \nHours: "+toHours(hours)+"\nPublications: "+pubs;
+    actionBox.innerText = reportText;
+    actionBox.innerHTML += "<br><button onclick='navigator.clipboard.writeText(reportText);'>Copy report to clipboard</button>";
+
     document.getElementById("overviewBox").innerHTML += "Hours: "+toHours(hours)+"<br>";
     document.getElementById("overviewBox").innerHTML += "LDC Hours: "+toHours(ldc)+"<br>";
     document.getElementById("overviewBox").innerHTML += "Publications: "+pubs+"<br>";
@@ -315,6 +324,7 @@ function loadOverview(year, month, day){
   
 
   function loadMonth(year, month, day){
+    actionBox.innerHTML = "";
     w = window.innerWidth;
     h = window.innerHeight;
     if(h<w)w=h;
@@ -381,7 +391,17 @@ function loadOverview(year, month, day){
       thisDiv.aLeft = (dag-1)*boxCC+10;
       thisDiv.aTop = week*boxCC+50;
       thisDiv.addEventListener("click", clickDay);
-      thisDiv.innerHTML = "<div style='position:absolute; left:1px; top:50%; padding:0; margin:0; -ms-transform: translateY(-50%); transform: translateY(-50%); width:100%; text-align:center;'>"+i+"</div>";
+      thisDiv.innerHTML = "<div style='position:absolute; top:50%; padding:0; margin:0; -ms-transform: translateY(-50%); transform: translateY(-50%); width:100%; text-align:center;'>"+i+"</div>";
+      for(j = 0; j < db.dates.length; j++){
+        if(db.dates[j].date == dateString){
+          var ring = document.createElement("div");
+          ring.className = "ring";
+          if(parseInt(db.dates[j].hours)>=120)ring.style.borderWidth = "2px";
+          if(parseInt(db.dates[j].hours)>=240)ring.style.borderWidth = "3px";
+          if(parseInt(db.dates[j].hours)>=360)ring.style.borderWidth = "4px";
+          thisDiv.appendChild(ring);
+        }
+      }
       /*for(j = 0; j < x.length; j++){
         if(x[j].date == dateString){
           if(myName != "" && JSON.stringify(x[j]).toLowerCase().indexOf(myName.toLowerCase()) != -1){
