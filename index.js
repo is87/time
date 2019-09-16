@@ -232,20 +232,26 @@ function hideSettings(){
     monthBox = document.getElementById("monthBox");
     overviewBox = document.getElementById("overviewBox");
 
-//var mc = new Hammer(monthBox);
-//var mc2 = new Hammer(dayBox);
+var mc = new Hammer(monthBox);
+var mc2 = new Hammer(overviewBox);
 
 //mc.add( new Hammer.Swipe({ direction: Hammer.DIRECTION_ALL, threshold: 10 }) );
 
-/*mc.on("swipeleft", function(ev) {
+mc.on("swipeleft", function(ev) {
     loadMonth(nextYear, nextMonth, 1);
 });
 
 mc.on("swiperight", function(ev) {
     loadMonth(prevYear, prevMonth, 1);
-});*/
+});
 
+mc2.on("swipeleft", function(ev) {
+  loadOverview(nextYear, nextMonth, 1);
+});
 
+mc2.on("swiperight", function(ev) {
+  loadOverview(prevYear, prevMonth, 1);
+});
 
 
 
