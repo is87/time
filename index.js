@@ -358,7 +358,7 @@ function loadOverview(year, month, day){
     boxWidth = (w-50)/7;
     boxCC = boxWidth+5;
 
-    monthBox.innerHTML = "<table style='table-layout: fixed; border-spacing:0; margin:0; padding:0; font-size:10px; color: #555; text-align: center; position: absolute; left: 5px; top: 10px; width:"+(w-10)+"px;'><tr style='font-weight:bold;'><td>MON</td><td>TUE</td><td>WED</td><td>THU</td><td>FRI</td><td>SAT</td><td>SUN</td></tr></table>";
+    monthBox.innerHTML = "<table style='table-layout: fixed; border-spacing:0; margin:0; padding:0; font-size:10px; color: #DDD; text-align: center; position: absolute; left: 5px; top: 10px; width:"+(w-10)+"px;'><tr style='font-weight:bold;'><td>MON</td><td>TUE</td><td>WED</td><td>THU</td><td>FRI</td><td>SAT</td><td>SUN</td></tr></table>";
     var start = first.getDay();
     //monthBox.innerHTML = months[d.getMonth()];
     var week = 0;
